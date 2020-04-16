@@ -1,6 +1,6 @@
 <template>
-    <div id="app">
-        <router-view/>
+    <div>
+        物控
     </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component({
-    name: 'app',
+    name: 'material',
 })
 export default class extends Vue {}
 </script>
