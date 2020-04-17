@@ -1,0 +1,58 @@
+{
+    "$id": "api",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ApiRes.Permission": {
+            "properties": {
+                "children": {
+                    "items": {
+                        "$ref": "api#/definitions/ApiRes.Permission"
+                    },
+                    "type": "array"
+                },
+                "meta": {
+                    "properties": {
+                        "icon": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "icon"
+                    ],
+                    "type": "object"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "meta",
+                "name",
+                "path"
+            ],
+            "type": "object"
+        },
+        "ApiRes.User": {
+            "properties": {
+                "permissions": {
+                    "items": {
+                        "$ref": "api#/definitions/ApiRes.Permission"
+                    },
+                    "type": "array"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "permissions",
+                "userName"
+            ],
+            "type": "object"
+        }
+    }
+}
+

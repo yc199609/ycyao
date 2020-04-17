@@ -6,17 +6,22 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "json": "cross-env typescript-json-schema src/api/home/response.d.ts '*' -o src/api/home/response.json --id=api --required   --strictNullChecks"
   },
   "dependencies": {
     "@types/js-cookie": "^2.2.6",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "cross-env": "^7.0.2",
     "element-ui": "^2.13.1",
+    "global": "^4.4.0",
     "js-cookie": "^2.2.1",
+    "jsonschema": "^1.2.6",
     "normalize.css": "^8.0.1",
     "path-to-regexp": "^6.1.0",
     "style-resources-loader": "^1.3.3",
+    "typescript-json-schema": "^0.42.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-cli-plugin-style-resources-loader": "^0.1.4",

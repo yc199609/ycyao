@@ -8,6 +8,7 @@
 <script lang='ts' >
 import { Vue, Component } from 'vue-property-decorator';
 import search from '@/components/searchBar.vue';
+import { test } from '@/api/home';
 
 @Component({
     name: 'home',
@@ -16,8 +17,9 @@ import search from '@/components/searchBar.vue';
     },
 })
 export default class extends Vue {
-    private fn() {
-        console.log('dssd');
-    }
+    private async search() {
+        const data  = await test();
+        console.log(data)
+    } 
 }
 </script>

@@ -20,45 +20,46 @@ const routes: RouteConfig[] = [
                 component: () => import('@/views/home.vue'),
                 meta: {
                     title: '首页',
-                    icon: '&#xe61f;',
+                    icon: '&#xe723;',
                 },
             },
         ],
     },
-    // {
-    //     path: '/price',
-    //     component: Layout,
-    //     redirect: '/price',
-    //     meta: {
-    //         title: '定价系统',
-    //     },
-    //     children: [
-    //         {
-    //             path: 'procurement',
-    //             component: () => import('@/views/price/procurement/index.vue'),
-    //             meta: {
-    //                 title: '采购',
-    //                 icon: '',
-    //             },
-    //         },
-    //         {
-    //             path: 'material',
-    //             component: () => import('@/views/price/material/index.vue'),
-    //             meta: {
-    //                 title: '物控',
-    //                 icon: '',
-    //             },
-    //         },
-    //         {
-    //             path: 'audit',
-    //             component: () => import('@/views/price/audit/index.vue'),
-    //             meta: {
-    //                 title: '审计',
-    //                 icon: '',
-    //             },
-    //         },
-    //     ],
-    // },
+    {
+        path: '/price',
+        component: Layout,
+        redirect: '/price/procurement',
+        meta: {
+            title: '定价系统',
+            icon: '&#xe6b7;'
+        },
+        children: [
+            {
+                path: 'procurement',
+                component: () => import('@/views/price/procurement/index.vue'),
+                meta: {
+                    title: '采购',
+                    icon: '&#xe653;',
+                },
+            },
+            {
+                path: 'material',
+                component: () => import('@/views/price/material/index.vue'),
+                meta: {
+                    title: '物控',
+                    icon: '&#xe729;',
+                },
+            },
+            {
+                path: 'audit',
+                component: () => import('@/views/price/audit/index.vue'),
+                meta: {
+                    title: '审计',
+                    icon: '&#xe654;',
+                },
+            },
+        ],
+    },
 ];
 
 const router = new VueRouter({
