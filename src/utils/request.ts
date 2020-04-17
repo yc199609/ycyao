@@ -1,37 +1,37 @@
-import axios from 'axios';
+import axios,{ AxiosRequestConfig } from 'axios';
 import { Message, MessageBox } from 'element-ui';
 // import { UserModule } from '@/store/modules/user';
 import { Validator } from 'jsonschema'
 
  const v = new Validator()
 
-export const validateResponseData = (schema: any, data: any, type: string) => {
+export const validateResponseData = (schema: any, res: any, type: string, url: string) => {
     v.addSchema(schema, '/api')
 
-    const result = v.validate(data, {
+    const result = v.validate(res.data, {
         $ref: `api#/definitions/${type}`
     })
   
     // 校验失败，数据不符合预期， 此处应该进行 前端异常上报， 如 sentry 之类的
     if (!result.valid) {
-      console.log('data is ', data)
-      console.log('errors', result.errors.map((item) => item.toString()))
+        Message({
+            message: '后台返回的数据格式错误',
+            type: 'error',
+            duration: 5 * 1000,
+        });
+        const errs = result.errors.map((item) => item.toString()).join('\n')
+        Promise.reject(new Error(`后台返回的数据格式错误\n请求url: ${url}\n${errs}`))
     }
   
-    return data
+    return res
 }
 
-const service = axios.create({
-    baseURL: process.env.BASE_API,
-    withCredentials: true, // 跨域带cookie
-    timeout: 5000,
-    headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-    },
-})
+axios.defaults.baseURL = process.env.BASE_API;
+axios.defaults.withCredentials = true;
+axios.defaults.headers['Content-Type'] = 'application/json; charset=utf-8'
+axios.defaults.timeout = 5000;
 
-
-service.interceptors.request.use(
+axios.interceptors.request.use(
     (config) => {
         return config;
     },
@@ -40,7 +40,7 @@ service.interceptors.request.use(
     },
 );
 
-service.interceptors.response.use(
+axios.interceptors.response.use(
     (response) => {
         const res = response.data;
         if (res.code !== 0) {
@@ -55,25 +55,6 @@ service.interceptors.response.use(
         }
     },
     (error) => {
-        // const status = error.response.status;
-        // if (status === 401) {
-        //     MessageBox.confirm(
-        //         '你已被登出，可以取消继续留在该页面，或者重新登录',
-        //         '确定登出',
-        //         {
-        //             confirmButtonText: '重新登录',
-        //             cancelButtonText: '取消',
-        //             type: 'warning',
-        //         },
-        //     ).then(() => {
-        //         // UserModule.FedLogOut();
-        //         location.reload();
-        //         return Promise.reject(error);
-        //     })
-        //     .catch(() => {
-        //         return Promise.reject(error);
-        //     });
-        // }
         Message({
             message: error.message,
             type: 'error',
@@ -82,5 +63,20 @@ service.interceptors.response.use(
         return Promise.reject(error);
     },
 );
+
+interface Options extends AxiosRequestConfig {
+    schema: any;
+    type: string;
+    url: string;
+}
+
+const service = (options: Options) => {
+    return new Promise((resolve,reject) => {
+        axios(options)
+        .then(res => {
+            validateResponseData(options.schema, res, options.type, options.url)
+        })
+    })
+}
 
 export default service;
