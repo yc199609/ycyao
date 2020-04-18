@@ -19,7 +19,7 @@ import { test } from '@/api/home';
 export default class extends Vue {
     private async search() {
         const data  = await test();
-        console.log(data)
-    } 
+        console.log(data);
+    }
 }
 </script>

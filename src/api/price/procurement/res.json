@@ -1,0 +1,246 @@
+{
+    "$id": "api",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ProcurementRes.Data": {
+            "properties": {
+                "barCode": {
+                    "type": "string"
+                },
+                "brandId": {
+                    "type": "number"
+                },
+                "brandName": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "number"
+                },
+                "experience": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "number"
+                },
+                "pic": {
+                    "type": "string"
+                },
+                "shortName": {
+                    "type": "string"
+                },
+                "spuCode": {
+                    "type": "string"
+                },
+                "status": {
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "barCode",
+                "brandId",
+                "brandName",
+                "code",
+                "createTime",
+                "experience",
+                "id",
+                "pic",
+                "shortName",
+                "spuCode",
+                "status"
+            ],
+            "type": "object"
+        },
+        "ProcurementRes.DetailData": {
+            "properties": {
+                "barCode": {
+                    "type": "string"
+                },
+                "brandId": {
+                    "type": "number"
+                },
+                "brandName": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "data": {
+                    "items": {
+                        "$ref": "api#/definitions/ProcurementRes.Goods"
+                    },
+                    "type": "array"
+                },
+                "experience": {
+                    "type": "string"
+                },
+                "pic": {
+                    "type": "string"
+                },
+                "shortName": {
+                    "type": "string"
+                },
+                "spuId": {
+                    "type": "number"
+                },
+                "supCode": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "barCode",
+                "brandId",
+                "brandName",
+                "code",
+                "data",
+                "experience",
+                "pic",
+                "shortName",
+                "spuId",
+                "supCode",
+                "type"
+            ],
+            "type": "object"
+        },
+        "ProcurementRes.Goods": {
+            "properties": {
+                "batchPrice": {
+                    "type": "number"
+                },
+                "costStatus": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "number"
+                },
+                "logisticsFreight": {
+                    "type": "number"
+                },
+                "logisticsTax": {
+                    "type": "number"
+                },
+                "logisticsTotal": {
+                    "type": "number"
+                },
+                "pic": {
+                    "type": "string"
+                },
+                "pricStatus": {
+                    "type": "number"
+                },
+                "property": {
+                    "type": "string"
+                },
+                "property1": {
+                    "type": "number"
+                },
+                "property2": {
+                    "type": "number"
+                },
+                "pucharseCost": {
+                    "type": "number"
+                },
+                "pucharseTax": {
+                    "type": "number"
+                },
+                "pucharseTaxCost": {
+                    "type": "number"
+                },
+                "pucharseTotal": {
+                    "type": "number"
+                },
+                "qty": {
+                    "type": "number"
+                },
+                "skuId": {
+                    "type": "number"
+                },
+                "spuId": {
+                    "type": "number"
+                },
+                "status": {
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "type": "number"
+                },
+                "supplierName": {
+                    "type": "string"
+                },
+                "tagTost": {
+                    "type": "number"
+                },
+                "taxStatus": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "batchPrice",
+                "costStatus",
+                "id",
+                "logisticsFreight",
+                "logisticsTax",
+                "logisticsTotal",
+                "pic",
+                "pricStatus",
+                "property",
+                "property1",
+                "property2",
+                "pucharseCost",
+                "pucharseTax",
+                "pucharseTaxCost",
+                "pucharseTotal",
+                "qty",
+                "skuId",
+                "spuId",
+                "status",
+                "supplierName",
+                "tagTost",
+                "taxStatus"
+            ],
+            "type": "object"
+        },
+        "ProcurementRes.Page": {
+            "properties": {
+                "currPage": {
+                    "type": "number"
+                },
+                "data": {
+                    "items": {
+                        "$ref": "api#/definitions/ProcurementRes.Data"
+                    },
+                    "type": "array"
+                },
+                "pageSize": {
+                    "type": "number"
+                },
+                "totalCount": {
+                    "type": "number"
+                },
+                "totalPage": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "currPage",
+                "data",
+                "pageSize",
+                "totalCount",
+                "totalPage"
+            ],
+            "type": "object"
+        }
+    }
+}
+

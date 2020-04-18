@@ -31,7 +31,7 @@ const routes: RouteConfig[] = [
         redirect: '/price/procurement',
         meta: {
             title: '定价系统',
-            icon: '&#xe6b7;'
+            icon: '&#xe6b7;',
         },
         children: [
             {
@@ -39,6 +39,15 @@ const routes: RouteConfig[] = [
                 component: () => import('@/views/price/procurement/index.vue'),
                 meta: {
                     title: '采购',
+                    icon: '&#xe653;',
+                },
+            },
+            {
+                path: 'procurement/detail',
+                component: () => import('@/views/price/procurement/detail.vue'),
+                meta: {
+                    hidden: true,
+                    title: '采购详情',
                     icon: '&#xe653;',
                 },
             },
