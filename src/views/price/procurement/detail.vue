@@ -121,16 +121,16 @@ export default class extends Vue {
         type: -1,
     };
     private get titleImage() {
-        if(typeof this.goods?.pic === 'string') {
-            return this.goods.pic.split(',')
+        if (typeof this.goods?.pic === 'string') {
+            return this.goods.pic.split(',');
         }
-        return []
+        return [];
     }
     private get experience() {
-        if(typeof this.goods?.experience === 'string') {
-            return this.goods.experience.split('->')
+        if (typeof this.goods?.experience === 'string') {
+            return this.goods.experience.split('->');
         }
-        return []
+        return [];
     }
     private async created() {
         const { data }  = await getDetail({
@@ -138,7 +138,7 @@ export default class extends Vue {
             pageSize: 10,
             spuId: 1,
         });
-        this.$set(this, 'goods', data)
+        this.$set(this, 'goods', data);
     }
 }
 </script>
