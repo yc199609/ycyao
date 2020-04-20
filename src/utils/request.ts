@@ -1,11 +1,11 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import { Message, MessageBox } from 'element-ui';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Message } from 'element-ui';
 // import { UserModule } from '@/store/modules/user';
 import { Validator } from 'jsonschema';
 
 const v = new Validator();
 
-export const validateResponseData = (options: any, res: any) => {
+export const validateResponseData = (options: Options, res: AxiosResponse<any>) => {
     v.addSchema(options.schema, '/api');
 
     const result = v.validate(res.data, {
