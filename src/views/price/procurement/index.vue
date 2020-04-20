@@ -61,14 +61,14 @@ export default class extends Vue {
     private totalCount = 20;
 
     private handleDetail() {
-        this.$router.push('procurement/detail')
+        this.$router.push('procurement/detail');
     }
 
-    private handleSizeChange(val:number) {
-        this.pageSize = val
+    private handleSizeChange(val: number) {
+        this.pageSize = val;
     }
 
-    private handleCurrentChange(val:number) {
+    private handleCurrentChange(val: number) {
         this.currentPage = val;
     }
 

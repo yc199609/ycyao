@@ -17,7 +17,7 @@ const routes: RouteConfig[] = [
         children: [
             {
                 path: 'dashboard',
-                component: () => import('@/views/home.vue'),
+                component: () => import('@/views/home/index.vue'),
                 meta: {
                     title: '首页',
                     icon: '&#xe723;',
