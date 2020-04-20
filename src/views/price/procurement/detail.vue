@@ -148,11 +148,11 @@ export default class extends Vue {
 }
 /deep/ .el-card{
     .textBox{
-        padding-left:20px;
+        padding-left: 20px;
         flex:1;
     }
     .el-card__body{
-        display:flex;
+        display: flex;
         flex-direction: row;
     }
 }
@@ -160,8 +160,8 @@ export default class extends Vue {
     line-height: 30px;
 }
 .label{
-    max-width:100px;
-    font-weight:700;
+    max-width: 100px;
+    font-weight: 700;
 }
 /deep/ .el-breadcrumb {
     line-height: 30px;
