@@ -2,6 +2,48 @@
     "$id": "api",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
+        "ApiRes.ChildrenMenu": {
+            "properties": {
+                "children": {
+                    "items": {
+                        "$ref": "api#/definitions/ApiRes.ChildrenMenu"
+                    },
+                    "type": "array"
+                },
+                "component": {
+                    "type": "string"
+                },
+                "meta": {
+                    "properties": {
+                        "icon": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "title"
+                    ],
+                    "type": "object"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "component",
+                "meta",
+                "path"
+            ],
+            "type": "object"
+        },
+        "ApiRes.Menus": {
+            "items": {
+                "$ref": "api#/definitions/ApiRes.TopMenu"
+            },
+            "type": "array"
+        },
         "ApiRes.Permission": {
             "properties": {
                 "children": {
@@ -31,6 +73,38 @@
             "required": [
                 "meta",
                 "name",
+                "path"
+            ],
+            "type": "object"
+        },
+        "ApiRes.TopMenu": {
+            "properties": {
+                "children": {
+                    "items": {
+                        "$ref": "api#/definitions/ApiRes.ChildrenMenu"
+                    },
+                    "type": "array"
+                },
+                "meta": {
+                    "properties": {
+                        "icon": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "title"
+                    ],
+                    "type": "object"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "meta",
                 "path"
             ],
             "type": "object"

@@ -23,8 +23,8 @@
                 <el-table-column label="定价状态" prop="experience" align="center" />
                 <el-table-column label="审核状态" prop="experience" align="center" />
                 <el-table-column label="操作" align="center">
-                    <template>
-                        <el-button type="text" @click="handleDetail">定价审核</el-button>
+                    <template slot-scope="scope">
+                        <el-button type="text" @click="handleDetail(scope.row.id)">定价审核</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -46,7 +46,7 @@
 <script lang='ts' >
 import { Vue, Component } from 'vue-property-decorator';
 import { getList } from '@/api/price/procurement/index';
-import SearchBar from '@/components/searchBar.vue';
+import SearchBar from '../components/search_bar.vue';
 
 @Component({
     name: 'procurement',
@@ -60,8 +60,8 @@ export default class extends Vue {
     private pageSize = 20;
     private totalCount = 20;
 
-    private handleDetail() {
-        this.$router.push('procurement/detail');
+    private handleDetail(id: number) {
+        this.$router.push(`procurement/detail/${id}`);
     }
 
     private handleSizeChange(val: number) {
@@ -81,8 +81,3 @@ export default class extends Vue {
     }
 }
 </script>
-<style lang="scss" scoped>
-.container{
-    padding: 1vw 3vw 0;
-}
-</style>

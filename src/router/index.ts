@@ -1,8 +1,14 @@
-import Vue from 'vue';
+import Vue, { VueConstructor } from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Layout from '@/layout/index.vue';
+import { getMenus } from '@/api/home/index';
 
 Vue.use(VueRouter);
+
+type ImportComponetType  = (path: string) => () => Promise<VueConstructor<Vue>>;
+
+
+const importComponet: ImportComponetType = (path: string) => () => import(`@/views${path}.vue`);
 
 const routes: RouteConfig[] = [
     {
@@ -10,69 +16,49 @@ const routes: RouteConfig[] = [
         name: 'login',
         component: () => import('../views/login/index.vue'),
     },
-    {
-        path: '/',
-        component: Layout,
-        redirect: '/dashboard',
-        children: [
-            {
-                path: 'dashboard',
-                component: () => import('@/views/home/index.vue'),
-                meta: {
-                    title: '首页',
-                    icon: '&#xe723;',
-                },
-            },
-        ],
-    },
-    {
-        path: '/price',
-        component: Layout,
-        redirect: '/price/procurement',
-        meta: {
-            title: '定价系统',
-            icon: '&#xe6b7;',
-        },
-        children: [
-            {
-                path: 'procurement',
-                component: () => import('@/views/price/procurement/index.vue'),
-                meta: {
-                    title: '采购',
-                    icon: '&#xe653;',
-                },
-            },
-            {
-                path: 'procurement/detail',
-                component: () => import('@/views/price/procurement/detail.vue'),
-                meta: {
-                    hidden: true,
-                    title: '采购详情',
-                    icon: '&#xe653;',
-                },
-            },
-            {
-                path: 'material',
-                component: () => import('@/views/price/material/index.vue'),
-                meta: {
-                    title: '物控',
-                    icon: '&#xe729;',
-                },
-            },
-            {
-                path: 'audit',
-                component: () => import('@/views/price/audit/index.vue'),
-                meta: {
-                    title: '审计',
-                    icon: '&#xe654;',
-                },
-            },
-        ],
-    },
 ];
 
-const router = new VueRouter({
+const router: MyRouter = new VueRouter({
   routes,
+});
+
+/**
+ * 递归菜单List生成routes格式
+ * @param menus 菜单List
+ * @param isTopLevel 是否最外层
+ */
+const formatterRouter = (menus: any, isTopLevel?: boolean): RouteConfig[] => {
+    menus.forEach((item: any) => {
+        if (item.children && item.children.length > 0) {
+            formatterRouter(item.children);
+        }
+        if (isTopLevel) {
+            item.component = Layout;
+            if (item.children && item.children.length > 0) {
+                item.redirect = item.children[0].path.startsWith('/') ? item.children[0].path : `${item.path}/${item.children[0].path}`;
+            }
+        } else {
+            item.component = importComponet(item.component);
+        }
+    });
+    return menus;
+};
+
+interface MyRouter extends VueRouter {
+    options?: any;
+}
+
+router.beforeEach(async (to, from, next: any) => {
+    if (router.options.addAsyncRouter) {
+        next();
+    } else {
+        const { data } = await getMenus();
+        const menuRoutes = formatterRouter(data, true);
+        router.addRoutes(menuRoutes);
+        router.options.routes = routes.concat(menuRoutes);
+        router.options.addAsyncRouter = true;
+        next({...to, replace: true});
+    }
 });
 
 export default router;

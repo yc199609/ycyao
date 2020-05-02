@@ -7,3 +7,10 @@ export const test = () => request({
     type: 'ApiRes.User',
     schema,
 });
+
+export const getMenus = () => request({
+    url: '/api/user/getMenus',
+    method: 'get',
+    type: 'ApiRes.Menus',
+    schema,
+});

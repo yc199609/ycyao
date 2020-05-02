@@ -69,6 +69,7 @@ export default class extends mixins(ResizeMixin) {
     transition: margin-left .28s;
     margin-left: $sideBarWidth;
     position: relative;
+    
 }
 .sidebar-container {
     transition: width 0.28s;

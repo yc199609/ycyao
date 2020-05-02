@@ -34,7 +34,7 @@ class App extends VuexModule implements IAppState {
 
     @Action
     public ToggleDevice(device: DeviceType) {
-      this.TOGGLE_DEVICE(device);
+        this.TOGGLE_DEVICE(device);
     }
 
     @Mutation

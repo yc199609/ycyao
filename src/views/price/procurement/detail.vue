@@ -136,7 +136,7 @@ export default class extends Vue {
         const { data }  = await getDetail({
             pageIndex: 1,
             pageSize: 10,
-            spuId: 1,
+            spuId: ~~this.$route.params.id,
         });
         this.$set(this, 'goods', data);
     }

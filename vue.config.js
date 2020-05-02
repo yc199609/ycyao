@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
     publicPath: '/', // 静态资源地址
-    productionSourceMap: false,
+    productionSourceMap: true,
     devServer: {
         proxy: {
             "/api": {

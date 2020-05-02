@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "json": "cross-env typescript-json-schema src/api/price/procurement/res.d.ts '*' -o src/api/price/procurement/res.json --id=api --required   --strictNullChecks"
+    "json": "cross-env typescript-json-schema src/api/home/response.d.ts '*' -o src/api/home/response.json --id=api --required   --strictNullChecks"
   },
   "dependencies": {
     "@types/js-cookie": "^2.2.6",

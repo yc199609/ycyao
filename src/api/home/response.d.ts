@@ -13,4 +13,25 @@ declare namespace ApiRes {
         },
         children?: Permission[]
     }
+
+    export type Menus = TopMenu[]
+    
+    interface TopMenu {
+        path: string,
+        meta: {
+            title: string,
+            icon?: string,
+        },
+        children?: ChildrenMenu[]
+    }
+
+    interface ChildrenMenu {
+        path: string,
+        component: string,
+        meta: {
+            title: string,
+            icon?: string,
+        },
+        children?: ChildrenMenu[]
+    }
 }

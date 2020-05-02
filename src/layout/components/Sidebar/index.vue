@@ -9,11 +9,12 @@
         <el-menu
             :collapse="isCollapse"
             mode="vertical"
-            :background-color="variables.menuBg"
-            :text-color="variables.menuText"
-            :active-text-color="variables.menuActiveText"
             :unique-opened="true"
             :collapse-transition="false"
+
+            :background-color="theme.menuBg"
+            :text-color="theme.menuText"
+            :active-text-color="theme.menuActiveText"
         >
             <sidebar-item
                 v-for="route in routes"
@@ -28,8 +29,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import variables from '@/styles/_variable.scss';
 import { AppModule } from '@/store/modules/app';
+import { ThemeModule } from '@/store/modules/theme';
 import SidebarItem from './SidebarItem.vue';
 
 @Component({
@@ -42,8 +43,8 @@ export default class extends Vue {
     get sidebar() {
         return AppModule.sidebar;
     }
-    get variables() {
-        return variables;
+    get theme() {
+        return ThemeModule;
     }
     get isCollapse() {
         return !this.sidebar.opened;
